@@ -38,13 +38,13 @@ body {
     -webkit-overflow-scrolling: touch;
     position: relative;
     overscroll-behavior-y: none;
+    padding-bottom: 100vh; /* Espacio extra para scroll */
 }
 
 .slide img {
     width: 100%;
     display: block;
     pointer-events: auto;
-    min-height: 100%;
 }
 
 .slider-controls {
