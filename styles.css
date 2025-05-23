@@ -7,15 +7,13 @@
 
 html, body {
     height: 100%;
-    overflow: hidden;
-    position: fixed;
     width: 100%;
 }
 
 body {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     background: #f0f0f0;
 }
 
@@ -24,7 +22,7 @@ body {
     max-width: 500px;
     position: relative;
     overflow: hidden;
-    height: 100%;
+    height: 100vh;
     touch-action: pan-y;
 }
 
@@ -39,32 +37,16 @@ body {
     min-width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    overscroll-behavior: contain;
-}
-
-.slide::-webkit-scrollbar {
-    width: 6px;
-}
-
-.slide::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.slide::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 3px;
 }
 
 .slide img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: contain;
     display: block;
-    pointer-events: auto;
 }
 
 .slider-controls {
@@ -135,10 +117,5 @@ body {
         padding: 12px;
         width: 45px;
         height: 45px;
-    }
-
-    .slide {
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-y: contain;
     }
 } 
