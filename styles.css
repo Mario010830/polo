@@ -7,7 +7,7 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
     background: #f0f0f0;
 }
@@ -17,47 +17,74 @@ body {
     max-width: 500px;
     position: relative;
     overflow: hidden;
-    touch-action: pan-y pinch-zoom;
+    touch-action: pan-y;
+    height: 100vh;
 }
 
 .slider {
     display: flex;
     transition: transform 0.3s ease-out;
     width: 100%;
+    height: 100%;
 }
 
 .slide {
     min-width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+.slide::-webkit-scrollbar {
+    width: 6px;
+}
+
+.slide::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.slide::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
 }
 
 .slide img {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: contain;
+    display: block;
 }
 
 .slider-controls {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     left: 0;
     right: 0;
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
+    z-index: 100;
+    pointer-events: none;
 }
 
 .slider-controls button {
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 15px;
     border-radius: 50%;
     cursor: pointer;
     font-size: 20px;
+    pointer-events: auto;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .slider-controls button:hover {
@@ -65,13 +92,15 @@ body {
 }
 
 .slider-dots {
-    position: absolute;
-    bottom: 50px;
+    position: fixed;
+    bottom: 80px;
     left: 0;
     right: 0;
     display: flex;
     justify-content: center;
     gap: 10px;
+    z-index: 100;
+    pointer-events: none;
 }
 
 .dot {
@@ -80,8 +109,21 @@ body {
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.5);
     cursor: pointer;
+    pointer-events: auto;
 }
 
 .dot.active {
     background: white;
+}
+
+@media (max-width: 500px) {
+    .slider-container {
+        max-width: 100%;
+    }
+    
+    .slider-controls button {
+        padding: 12px;
+        width: 45px;
+        height: 45px;
+    }
 } 
