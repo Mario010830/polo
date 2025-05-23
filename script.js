@@ -9,6 +9,7 @@ const dotsContainer = document.querySelector('.slider-dots');
 let currentSlide = 0;
 let startX = 0;
 let isDragging = false;
+let isScrolling = false;
 
 // Crear los dots
 slides.forEach((_, index) => {
@@ -38,26 +39,31 @@ function goToSlide(index) {
 slider.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
     isDragging = true;
+    isScrolling = false;
 });
 
 slider.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
-    e.preventDefault();
+    
     const currentX = e.touches[0].clientX;
     const diff = startX - currentX;
     
-    if (Math.abs(diff) > 50) {
+    // Si el movimiento es más horizontal que vertical, cambiamos de slide
+    if (Math.abs(diff) > 50 && !isScrolling) {
         if (diff > 0 && currentSlide < slides.length - 1) {
             goToSlide(currentSlide + 1);
         } else if (diff < 0 && currentSlide > 0) {
             goToSlide(currentSlide - 1);
         }
         isDragging = false;
+    } else {
+        isScrolling = true;
     }
 });
 
 slider.addEventListener('touchend', () => {
     isDragging = false;
+    isScrolling = false;
 });
 
 // Botones de navegación
